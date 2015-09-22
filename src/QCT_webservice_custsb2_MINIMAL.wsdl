@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Web Services API : QCT_webservice
+-->
+<definitions targetNamespace="http://soap.sforce.com/schemas/class/QCT_webservice" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.sforce.com/schemas/class/QCT_webservice">
+ <types>
+  <xsd:schema elementFormDefault="qualified" targetNamespace="http://soap.sforce.com/schemas/class/QCT_webservice">
+   <xsd:element name="AllowFieldTruncationHeader">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="allowFieldTruncation" type="xsd:boolean"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="CallOptions">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="client" type="xsd:string"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="DebuggingHeader">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="categories" minOccurs="0" maxOccurs="unbounded" type="tns:LogInfo"/>
+      <xsd:element name="debugLevel" type="tns:LogType"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:complexType name="LogInfo">
+    <xsd:sequence>
+     <xsd:element name="category" type="tns:LogCategory"/>
+     <xsd:element name="level" type="tns:LogCategoryLevel"/>
+    </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="LogCategory">
+    <xsd:restriction base="xsd:string">
+     <xsd:enumeration value="Db"/>
+     <xsd:enumeration value="Workflow"/>
+     <xsd:enumeration value="Validation"/>
+     <xsd:enumeration value="Callout"/>
+     <xsd:enumeration value="Apex_code"/>
+     <xsd:enumeration value="Apex_profiling"/>
+     <xsd:enumeration value="Visualforce"/>
+     <xsd:enumeration value="System"/>
+     <xsd:enumeration value="All"/>
+    </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="LogCategoryLevel">
+    <xsd:restriction base="xsd:string">
+     <xsd:enumeration value="Internal"/>
+     <xsd:enumeration value="Finest"/>
+     <xsd:enumeration value="Finer"/>
+     <xsd:enumeration value="Fine"/>
+     <xsd:enumeration value="Debug"/>
+     <xsd:enumeration value="Info"/>
+     <xsd:enumeration value="Warn"/>
+     <xsd:enumeration value="Error"/>
+    </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="LogType">
+    <xsd:restriction base="xsd:string">
+     <xsd:enumeration value="None"/>
+     <xsd:enumeration value="Debugonly"/>
+     <xsd:enumeration value="Db"/>
+     <xsd:enumeration value="Profiling"/>
+     <xsd:enumeration value="Callout"/>
+     <xsd:enumeration value="Detail"/>
+    </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:element name="DebuggingInfo">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="debugLog" type="xsd:string"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="SessionHeader">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="sessionId" type="xsd:string"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:simpleType name="ID">
+    <xsd:restriction base="xsd:string">
+     <xsd:length value="18"/>
+     <xsd:pattern value="[a-zA-Z0-9]{18}"/>
+    </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:element name="getEditFields">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strObjectAPIName" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getEditFieldsResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" minOccurs="0" maxOccurs="unbounded" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getPicklistValues">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strObjectAPIName" type="xsd:string" nillable="true"/>
+      <xsd:element name="strFieldName" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getPicklistValuesResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" minOccurs="0" maxOccurs="unbounded" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getReadFields">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strObjectAPIName" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getReadFieldsResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" minOccurs="0" maxOccurs="unbounded" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getRecordsAsPXML">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strXMLupdate" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getRecordsAsPXMLResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getRecordsAsStrings">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strQuery" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getRecordsAsStringsResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" minOccurs="0" maxOccurs="unbounded" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="insertRecordReturnResultsAsPXML">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strQuery" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="insertRecordReturnResultsAsPXMLResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="insertRecordReturnResultsAsStrings">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strXMLupdate" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="insertRecordReturnResultsAsStringsResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="updateFieldsReturnResultsAsPXML">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strXMLupdate" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="updateFieldsReturnResultsAsPXMLResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="updateFieldsReturnResultsAsStrings">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strXMLupdate" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="updateFieldsReturnResultsAsStringsResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="updateMultipleRecordsReturnResultsAsPXML">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strXMLupdate" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="updateMultipleRecordsReturnResultsAsPXMLResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="updateMultipleRecordsReturnResultsAsStrings">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="strXMLupdate" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="updateMultipleRecordsReturnResultsAsStringsResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" minOccurs="0" maxOccurs="unbounded" type="xsd:string" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+  </xsd:schema>
+ </types>
+ <!-- Message for the header parts -->
+ <message name="Header">
+  <part name="AllowFieldTruncationHeader" element="tns:AllowFieldTruncationHeader"/>
+  <part name="CallOptions" element="tns:CallOptions"/>
+  <part name="DebuggingHeader" element="tns:DebuggingHeader"/>
+  <part name="DebuggingInfo" element="tns:DebuggingInfo"/>
+  <part name="SessionHeader" element="tns:SessionHeader"/>
+ </message>
+ <!-- Operation Messages -->
+ <message name="getEditFieldsRequest">
+  <part element="tns:getEditFields" name="parameters"/>
+ </message>
+ <message name="getEditFieldsResponse">
+  <part element="tns:getEditFieldsResponse" name="parameters"/>
+ </message>
+ <message name="getPicklistValuesRequest">
+  <part element="tns:getPicklistValues" name="parameters"/>
+ </message>
+ <message name="getPicklistValuesResponse">
+  <part element="tns:getPicklistValuesResponse" name="parameters"/>
+ </message>
+ <message name="getReadFieldsRequest">
+  <part element="tns:getReadFields" name="parameters"/>
+ </message>
+ <message name="getReadFieldsResponse">
+  <part element="tns:getReadFieldsResponse" name="parameters"/>
+ </message>
+ <message name="getRecordsAsPXMLRequest">
+  <part element="tns:getRecordsAsPXML" name="parameters"/>
+ </message>
+ <message name="getRecordsAsPXMLResponse">
+  <part element="tns:getRecordsAsPXMLResponse" name="parameters"/>
+ </message>
+ <message name="getRecordsAsStringsRequest">
+  <part element="tns:getRecordsAsStrings" name="parameters"/>
+ </message>
+ <message name="getRecordsAsStringsResponse">
+  <part element="tns:getRecordsAsStringsResponse" name="parameters"/>
+ </message>
+ <message name="insertRecordReturnResultsAsPXMLRequest">
+  <part element="tns:insertRecordReturnResultsAsPXML" name="parameters"/>
+ </message>
+ <message name="insertRecordReturnResultsAsPXMLResponse">
+  <part element="tns:insertRecordReturnResultsAsPXMLResponse" name="parameters"/>
+ </message>
+ <message name="insertRecordReturnResultsAsStringsRequest">
+  <part element="tns:insertRecordReturnResultsAsStrings" name="parameters"/>
+ </message>
+ <message name="insertRecordReturnResultsAsStringsResponse">
+  <part element="tns:insertRecordReturnResultsAsStringsResponse" name="parameters"/>
+ </message>
+ <message name="updateFieldsReturnResultsAsPXMLRequest">
+  <part element="tns:updateFieldsReturnResultsAsPXML" name="parameters"/>
+ </message>
+ <message name="updateFieldsReturnResultsAsPXMLResponse">
+  <part element="tns:updateFieldsReturnResultsAsPXMLResponse" name="parameters"/>
+ </message>
+ <message name="updateFieldsReturnResultsAsStringsRequest">
+  <part element="tns:updateFieldsReturnResultsAsStrings" name="parameters"/>
+ </message>
+ <message name="updateFieldsReturnResultsAsStringsResponse">
+  <part element="tns:updateFieldsReturnResultsAsStringsResponse" name="parameters"/>
+ </message>
+ <message name="updateMultipleRecordsReturnResultsAsPXMLRequest">
+  <part element="tns:updateMultipleRecordsReturnResultsAsPXML" name="parameters"/>
+ </message>
+ <message name="updateMultipleRecordsReturnResultsAsPXMLResponse">
+  <part element="tns:updateMultipleRecordsReturnResultsAsPXMLResponse" name="parameters"/>
+ </message>
+ <message name="updateMultipleRecordsReturnResultsAsStringsRequest">
+  <part element="tns:updateMultipleRecordsReturnResultsAsStrings" name="parameters"/>
+ </message>
+ <message name="updateMultipleRecordsReturnResultsAsStringsResponse">
+  <part element="tns:updateMultipleRecordsReturnResultsAsStringsResponse" name="parameters"/>
+ </message>
+ <portType name="QCT_webservicePortType">
+  <operation name="getEditFields">
+   <input message="tns:getEditFieldsRequest"/>
+   <output message="tns:getEditFieldsResponse"/>
+  </operation>
+  <operation name="getPicklistValues">
+   <input message="tns:getPicklistValuesRequest"/>
+   <output message="tns:getPicklistValuesResponse"/>
+  </operation>
+  <operation name="getReadFields">
+   <input message="tns:getReadFieldsRequest"/>
+   <output message="tns:getReadFieldsResponse"/>
+  </operation>
+  <operation name="getRecordsAsPXML">
+   <input message="tns:getRecordsAsPXMLRequest"/>
+   <output message="tns:getRecordsAsPXMLResponse"/>
+  </operation>
+  <operation name="getRecordsAsStrings">
+   <input message="tns:getRecordsAsStringsRequest"/>
+   <output message="tns:getRecordsAsStringsResponse"/>
+  </operation>
+  <operation name="insertRecordReturnResultsAsPXML">
+   <input message="tns:insertRecordReturnResultsAsPXMLRequest"/>
+   <output message="tns:insertRecordReturnResultsAsPXMLResponse"/>
+  </operation>
+  <operation name="insertRecordReturnResultsAsStrings">
+   <input message="tns:insertRecordReturnResultsAsStringsRequest"/>
+   <output message="tns:insertRecordReturnResultsAsStringsResponse"/>
+  </operation>
+  <operation name="updateFieldsReturnResultsAsPXML">
+   <input message="tns:updateFieldsReturnResultsAsPXMLRequest"/>
+   <output message="tns:updateFieldsReturnResultsAsPXMLResponse"/>
+  </operation>
+  <operation name="updateFieldsReturnResultsAsStrings">
+   <input message="tns:updateFieldsReturnResultsAsStringsRequest"/>
+   <output message="tns:updateFieldsReturnResultsAsStringsResponse"/>
+  </operation>
+  <operation name="updateMultipleRecordsReturnResultsAsPXML">
+   <input message="tns:updateMultipleRecordsReturnResultsAsPXMLRequest"/>
+   <output message="tns:updateMultipleRecordsReturnResultsAsPXMLResponse"/>
+  </operation>
+  <operation name="updateMultipleRecordsReturnResultsAsStrings">
+   <input message="tns:updateMultipleRecordsReturnResultsAsStringsRequest"/>
+   <output message="tns:updateMultipleRecordsReturnResultsAsStringsResponse"/>
+  </operation>
+ </portType>
+ <binding name="QCT_webserviceBinding" type="tns:QCT_webservicePortType">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="getEditFields">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+  <operation name="getPicklistValues">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+  <operation name="getReadFields">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+  <operation name="getRecordsAsPXML">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+  <operation name="getRecordsAsStrings">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+  <operation name="insertRecordReturnResultsAsPXML">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+  <operation name="insertRecordReturnResultsAsStrings">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+  <operation name="updateFieldsReturnResultsAsPXML">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+  <operation name="updateFieldsReturnResultsAsStrings">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+  <operation name="updateMultipleRecordsReturnResultsAsPXML">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+  <operation name="updateMultipleRecordsReturnResultsAsStrings">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:header use="literal" part="CallOptions" message="tns:Header"/>
+    <soap:header use="literal" part="DebuggingHeader" message="tns:Header"/>
+    <soap:header use="literal" part="AllowFieldTruncationHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:header use="literal" part="DebuggingInfo" message="tns:Header"/>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+ </binding>
+ <service name="QCT_webserviceService">
+  <documentation></documentation>
+  <port binding="tns:QCT_webserviceBinding" name="QCT_webservice">
+   <soap:address location="https://cs30.salesforce.com/services/Soap/class/QCT_webservice"/>
+  </port>
+ </service>
+</definitions>
